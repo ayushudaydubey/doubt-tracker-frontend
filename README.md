@@ -24,13 +24,16 @@ This is the **frontend** of the Doubt Tracker App – a platform for students to
 ### 1. Clone the Repository
 
 
-git clone https://github.com/your-username/doubt-tracker.git
+git clone https://github.com/ayushudaydubey/doubt-tracker-frontend
+
 cd doubt-tracker/client
+
 2. Install Dependencies
 bash
 Copy
 Edit
 npm install
+
 3. Setup Environment Variables
 Create a .env file in the root:
 
@@ -38,6 +41,7 @@ env
 Copy
 Edit
 VITE_API_URL=http://localhost:3000
+
 ✅ Replace with https://doubt-tracker-backend.onrender.com for production.
 
 4. Run the Development Server
@@ -49,6 +53,7 @@ Your frontend will now be running on: http://localhost:5173
 
 🧪 Available Scripts
 Command	Description
+
 npm run dev	Start local development server
 npm run build	Build production-ready app
 npm run preview	Preview the production build
@@ -115,15 +120,5 @@ This project is licensed under the MIT License.
 📬 Contact
 For queries or suggestions, feel free to open an issue or contact the maintainer.
 
-yaml
-Copy
-Edit
 
----
 
-Let me know if you'd like to add:
-
-- Screenshots or demo GIFs
-- GitHub badges
-- Setup for Vercel or Netlify deployment  
-- Separate sections for mentor/student features
