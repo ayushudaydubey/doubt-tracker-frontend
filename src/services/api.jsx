@@ -1,7 +1,10 @@
 import axios from "axios";
+const isLocalhost = window.location.hostname === "localhost";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: isLocalhost
+    ? "http://localhost:3000" 
+    : "https://doubt-tracker-backend.onrender.com", 
 });
 
 axiosInstance.interceptors.request.use((config) => {
