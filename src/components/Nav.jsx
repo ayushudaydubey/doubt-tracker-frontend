@@ -71,7 +71,7 @@ const Nav = () => {
           )}
         </div>
 
-        {/* Mobile menu toggle */}
+        {/* Mobil menu toggler  */}
         <button
           className="md:hidden text-white focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
@@ -110,6 +110,7 @@ const Nav = () => {
               <button
                 onClick={() => {
                   handleLogout();
+                  navigate("/")
                   setIsOpen(false);
                 }}
                 className="w-full text-left bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md font-medium transition mt-2"
