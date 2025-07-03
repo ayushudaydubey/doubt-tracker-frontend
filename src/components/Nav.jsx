@@ -71,7 +71,7 @@ const Nav = () => {
           )}
         </div>
 
-        {/* Mobile menu toggle */}
+        {/* Mobil menu toggler  */}
         <button
           className="md:hidden text-white focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
