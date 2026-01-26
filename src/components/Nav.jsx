@@ -120,7 +120,7 @@ const Nav = () => {
             </>
           ) : (
             <NavLink
-              to="/auth/student-login"
+              to="/"
               className={navLinkClass}
               onClick={() => setIsOpen(false)}
             >

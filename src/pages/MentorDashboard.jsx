@@ -26,11 +26,9 @@ const MentorDashboard = () => {
   }, []);
 
   const getStatusTag = (doubt) => {
-    if (doubt.response?.text) {
-      return { label: "SOLVED", className: "bg-green-500" };
-    } else {
-      return { label: "NOT CLEARED", className: "bg-red-500" };
-    }
+    if (doubt.status === "resolved") return { label: "SOLVED", className: "bg-green-500" };
+    if (doubt.status === "in-progress") return { label: "IN PROGRESS", className: "bg-orange-500" };
+    return { label: "NOT CLEARED", className: "bg-red-500" };
   };
 
   const indexOfLast = currentPage * doubtsPerPage;
@@ -45,10 +43,8 @@ const MentorDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-orange-50 px-4 pt-26 pb-10">
-      <h2 className="text-3xl font-semibold text-orange-500 mb-8 text-left">
-        Mentor Doubts Dashboard
-      </h2>
+    <div className="min-h-screen bg-black text-gray-200 px-6 pt-28">
+      <h2 className="text-3xl font-medium text-green-400 mb-8 text-left">Mentor Doubts Dashboard</h2>
 
       {loading ? (
         <div className="flex justify-center items-center min-h-[200px]">
@@ -59,48 +55,27 @@ const MentorDashboard = () => {
       ) : (
         <>
        
-          <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {currentDoubts.map((doubt) => {
               const { label, className } = getStatusTag(doubt);
               return (
-                <div
-                  key={doubt._id}
-                  className="bg-white rounded-2xl shadow-lg p-6  relative"
-                >
-                  <span
-                    className={`absolute top-3 right-3 text-xs font-semibold text-white px-3 py-1 rounded-full ${className}`}
-                  >
+                <div key={doubt._id} className="bg-[#161b22] border border-gray-700 rounded-lg p-5 hover:border-green-500 transition">
+                  <span className={`inline-block text-xs font-semibold text-white px-3 py-1 rounded-full ${className}`}>
                     {label}
                   </span>
 
-                  <h3 className="text-xl font-semibold mb-2 line-clamp-2">
-                    {doubt.title}
-                  </h3>
+                  <h3 className="text-lg font-semibold mb-2 text-green-400 line-clamp-2">{doubt.title}</h3>
 
-                  <p className="text-sm text-gray-600 mb-2 line-clamp-3">
-                    {doubt.description}
-                  </p>
+                  <p className="text-sm text-gray-400 mb-2 line-clamp-3">{doubt.description}</p>
 
                   {doubt.image && (
-                    <img
-                      src={doubt.image}
-                      alt="doubt"
-                      className="rounded-lg mb-3 h-40 w-full object-cover"
-                    />
+                    <img src={doubt.image} alt="doubt" className="rounded-lg mb-3 h-40 w-full object-cover border border-gray-700" />
                   )}
 
-                  <p className="text-xs text-gray-500 mb-2">
-                    Submitted:{" "}
-                    {new Date(doubt.createdAt).toLocaleDateString()}
-                  </p>
+                  <p className="text-xs text-gray-500 mb-2">Submitted: {new Date(doubt.createdAt).toLocaleDateString()}</p>
 
-                  <div className="mt-4 flex gap-4 text-sm font-medium">
-                    <Link
-                      to={`/doubts/mentor/${doubt._id}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      View
-                    </Link>
+                  <div className="mt-4 flex gap-4 text-sm">
+                    <Link to={`/doubts/mentor/${doubt._id}`} className="text-blue-400 hover:underline">View</Link>
                   </div>
                 </div>
               );
