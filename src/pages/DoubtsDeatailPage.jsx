@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../services/api";
 import { toast } from "react-toastify";
@@ -10,8 +10,31 @@ const DoubtDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [msgText, setMsgText] = useState("");
   const [msgFile, setMsgFile] = useState(null);
-  const [openImage, setOpenImage] = useState(null);
+  const [openIndex, setOpenIndex] = useState(null);
   const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const images = useMemo(() => {
+    if (!doubt) return [];
+    const arr = [];
+    if (doubt.image) arr.push(doubt.image);
+    if (doubt.messages && doubt.messages.length) {
+      doubt.messages.forEach((m) => {
+        if (m.image) arr.push(m.image);
+      });
+    }
+    return arr;
+  }, [doubt]);
+
+  useEffect(() => {
+    if (openIndex === null) return;
+    const onKey = (e) => {
+      if (e.key === "Escape") return setOpenIndex(null);
+      if (e.key === "ArrowLeft") return setOpenIndex((i) => (i - 1 + images.length) % images.length);
+      if (e.key === "ArrowRight") return setOpenIndex((i) => (i + 1) % images.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openIndex, images.length]);
 
   useEffect(() => {
     const fetchDoubt = async () => {
@@ -104,7 +127,10 @@ const DoubtDetailPage = () => {
                     src={doubt.image}
                     alt="Doubt"
                     className="w-full h-full object-cover cursor-pointer"
-                    onClick={() => setOpenImage(doubt.image)}
+                    onClick={() => {
+                      const idx = images.findIndex((s) => s === doubt.image);
+                      setOpenIndex(idx >= 0 ? idx : 0);
+                    }}
                   />
                 </div>
               </div>
@@ -229,7 +255,10 @@ const DoubtDetailPage = () => {
                                 src={m.image}
                                 alt="Attachment"
                                 className="w-40 h-28 sm:w-56 sm:h-40 object-cover rounded-lg border border-gray-200 cursor-pointer"
-                                onClick={() => setOpenImage(m.image)}
+                                onClick={() => {
+                                  const idx = images.findIndex((s) => s === m.image);
+                                  setOpenIndex(idx >= 0 ? idx : 0);
+                                }}
                               />
                             </div>
                           )}
@@ -242,20 +271,55 @@ const DoubtDetailPage = () => {
             </div>
           )}
 
-          {/* Image Zoom Modal */}
-          {openImage && (
+          {/* Image Gallery Modal */}
+          {openIndex !== null && images.length > 0 && (
             <div
               className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-              onClick={() => setOpenImage(null)}
+              onClick={() => setOpenIndex(null)}
             >
               <div className="relative p-4" onClick={(e) => e.stopPropagation()}>
                 <button
+                  type="button"
                   className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow-md"
-                  onClick={() => setOpenImage(null)}
+                  onClick={() => setOpenIndex(null)}
+                  aria-label="Close image"
                 >
-                  ✕
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
-                <img src={openImage} alt="Zoom" className="max-w-[90vw] max-h-[90vh] rounded-lg shadow-lg object-contain" />
+
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    className="bg-white bg-opacity-80 rounded-full p-2 shadow-md"
+                    onClick={() => {
+                      setOpenIndex((prev) => {
+                        if (typeof prev !== 'number') return 0;
+                        return (prev - 1 + images.length) % images.length;
+                      });
+                    }}
+                    aria-label="Previous image"
+                  >
+                    ‹
+                  </button>
+
+                  <img src={images[openIndex] || ''} alt={`Image ${openIndex + 1}`} className="max-w-[80vw] max-h-[80vh] rounded-lg shadow-lg object-contain" />
+
+                  <button
+                    type="button"
+                    className="bg-white bg-opacity-80 rounded-full p-2 shadow-md"
+                    onClick={() => {
+                      setOpenIndex((prev) => {
+                        if (typeof prev !== 'number') return 0;
+                        return (prev + 1) % images.length;
+                      });
+                    }}
+                    aria-label="Next image"
+                  >
+                    ›
+                  </button>
+                </div>
               </div>
             </div>
           )}
