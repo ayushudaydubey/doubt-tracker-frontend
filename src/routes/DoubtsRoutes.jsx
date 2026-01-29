@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 import CreateDoubt from "../pages/CreateDoubt";
-import EditDoubt from "../pages/EditDoubt";
+// import EditDoubt from "../pages/EditDoubt";
 
 import DoubtDetailPage from "../pages/DoubtsDeatailPage";
 import StudentDoubtDetailPage from "../pages/StudentDoubtDetailPage";
@@ -20,10 +20,7 @@ const DoubtsRoutes = () => {
         path="create"
         element={isStudent ? <CreateDoubt /> : <Navigate to="/" />}
       />
-      <Route
-        path="edit/:id"
-        element={isStudent ? <EditDoubt /> : <Navigate to="/" />}
-      />
+    
 
 
       <Route
