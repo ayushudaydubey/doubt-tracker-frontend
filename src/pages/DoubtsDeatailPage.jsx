@@ -29,8 +29,8 @@ const DoubtDetailPage = () => {
     if (openIndex === null) return;
     const onKey = (e) => {
       if (e.key === "Escape") return setOpenIndex(null);
-      if (e.key === "ArrowLeft") return setOpenIndex((i) => (i - 1 + images.length) % images.length);
-      if (e.key === "ArrowRight") return setOpenIndex((i) => (i + 1) % images.length);
+      if (e.key === "ArrowLeft") return setOpenIndex((i) => (typeof i === 'number' ? (i - 1 + images.length) % images.length : 0));
+      if (e.key === "ArrowRight") return setOpenIndex((i) => (typeof i === 'number' ? (i + 1) % images.length : 0));
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -75,8 +75,8 @@ const DoubtDetailPage = () => {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-black to-gray-900">
         <div className="text-center">
           <div className="relative">
-            <div className="w-16 h-16 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mx-auto" />
-            <div className="w-16 h-16 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin absolute top-0 left-1/2 -translate-x-1/2" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
+            <div className="w-16 h-16 border-4 border-green-500/30 border-t-green-500 rounded-full animate-spin mx-auto" />
+            <div className="w-16 h-16 border-4 border-emerald-500/30 border-t-emerald-500 rounded-full animate-spin absolute top-0 left-1/2 -translate-x-1/2" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
           </div>
           <p className="mt-4 text-gray-400 font-medium animate-pulse">Loading doubt details...</p>
         </div>
@@ -104,8 +104,8 @@ const DoubtDetailPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 text-gray-200 px-3 py-20 pb-8">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -113,13 +113,13 @@ const DoubtDetailPage = () => {
         <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl border border-gray-700/50 rounded-t-2xl shadow-lg p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
+              <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
                 Doubt Details - Mentor View
               </h2>
             </div>
@@ -168,8 +168,8 @@ const DoubtDetailPage = () => {
             {/* Right Column - Details */}
             <div className={`order-2 space-y-4 ${!doubt.image ? 'lg:col-span-2' : ''}`}>
               {/* Student Information */}
-              <div className="bg-gradient-to-r from-blue-900/20 to-cyan-900/20 border border-blue-700/30 rounded-xl p-4 backdrop-blur-sm">
-                <h4 className="text-sm font-semibold text-blue-400 mb-3 flex items-center gap-2">
+              <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-700/30 rounded-xl p-4 backdrop-blur-sm">
+                <h4 className="text-sm font-semibold text-green-400 mb-3 flex items-center gap-2">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
@@ -177,11 +177,11 @@ const DoubtDetailPage = () => {
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                   <div className="bg-gray-800/50 border border-gray-700/50 p-2.5 rounded-lg">
-                    <span className="text-blue-400 font-medium block mb-1">Name</span>
+                    <span className="text-green-400 font-medium block mb-1">Name</span>
                     <span className="text-gray-200">{doubt.student?.name || "N/A"}</span>
                   </div>
                   <div className="bg-gray-800/50 border border-gray-700/50 p-2.5 rounded-lg">
-                    <span className="text-blue-400 font-medium block mb-1">Email</span>
+                    <span className="text-green-400 font-medium block mb-1">Email</span>
                     <span className="text-gray-200 truncate block">{doubt.student?.email || "N/A"}</span>
                   </div>
                 </div>
@@ -189,15 +189,15 @@ const DoubtDetailPage = () => {
 
               {/* Metadata */}
               <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 bg-gray-800/30 px-3 py-2 rounded-lg border border-gray-700/50">
-                <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>Posted: {new Date(doubt.createdAt).toLocaleString()}</span>
               </div>
 
               {/* Title */}
-              <div className="bg-gradient-to-r from-blue-500/10 to-transparent p-4 rounded-xl border-l-4 border-blue-500 shadow-lg shadow-blue-500/5">
-                <h3 className="text-base sm:text-lg font-semibold text-blue-400 leading-tight">
+              <div className="bg-gradient-to-r from-green-500/10 to-transparent p-4 rounded-xl border-l-4 border-green-500 shadow-lg shadow-green-500/5">
+                <h3 className="text-base sm:text-lg font-semibold text-green-400 leading-tight">
                   {doubt.title}
                 </h3>
               </div>
@@ -252,7 +252,7 @@ const DoubtDetailPage = () => {
           {doubt.messages && doubt.messages.length > 0 && (
             <div className="border-t border-gray-700/50 bg-gray-900/30 p-4 sm:p-6">
               <h4 className="text-base sm:text-lg font-semibold text-gray-200 mb-3 flex items-center gap-2">
-                <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
                 Conversation
@@ -265,13 +265,13 @@ const DoubtDetailPage = () => {
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${
                           m.role === 'student' 
                             ? 'bg-gradient-to-br from-orange-500 to-amber-600 text-white shadow-lg shadow-orange-500/20' 
-                            : 'bg-gradient-to-br from-blue-500 to-cyan-600 text-white shadow-lg shadow-blue-500/20'
+                            : 'bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-500/20'
                         }`}>
                           {m.role === 'student' ? 'S' : 'M'}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-xs font-semibold text-blue-400 capitalize">
+                            <span className="text-xs font-semibold text-green-400 capitalize">
                               {m.role}
                             </span>
                             <span className="text-xs text-gray-600">•</span>
@@ -287,7 +287,7 @@ const DoubtDetailPage = () => {
                               <img
                                 src={m.image}
                                 alt="Attachment"
-                                className="w-32 h-24 sm:w-40 sm:h-32 object-cover rounded-lg border border-gray-700 cursor-pointer hover:border-blue-500/50 transition-colors"
+                                className="w-32 h-24 sm:w-40 sm:h-32 object-cover rounded-lg border border-gray-700 cursor-pointer hover:border-green-500/50 transition-colors"
                                 onClick={() => {
                                   const idx = images.findIndex((s) => s === m.image);
                                   setOpenIndex(idx >= 0 ? idx : 0);
@@ -361,7 +361,7 @@ const DoubtDetailPage = () => {
           {currentUser?.role === "mentor" && doubt.status !== "resolved" && (
             <div className="border-t border-gray-700/50 bg-gray-900/30 p-4 sm:p-6">
               <h4 className="text-sm sm:text-base font-semibold text-gray-200 mb-3 flex items-center gap-2">
-                <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                 </svg>
                 Send a Message
@@ -371,7 +371,7 @@ const DoubtDetailPage = () => {
                   value={msgText}
                   onChange={(e) => setMsgText(e.target.value)}
                   rows={3}
-                  className="w-full p-3 bg-gray-800/50 border border-gray-700 rounded-xl text-gray-200 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all resize-none"
+                  className="w-full p-3 bg-gray-800/50 border border-gray-700 rounded-xl text-gray-200 text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500 transition-all resize-none"
                   placeholder="Write a message to the student..."
                 />
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
@@ -379,11 +379,11 @@ const DoubtDetailPage = () => {
                     type="file" 
                     accept="image/*" 
                     onChange={(e) => setMsgFile(e.target.files[0] || null)}
-                    className="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-blue-400 hover:file:bg-gray-700 file:border file:border-gray-700 cursor-pointer transition"
+                    className="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-green-400 hover:file:bg-gray-700 file:border file:border-gray-700 cursor-pointer transition"
                   />
                   <button
                     onClick={handleSendMessage}
-                    className="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-blue-500/30 text-sm whitespace-nowrap flex items-center justify-center gap-2 group"
+                    className="px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-green-500/30 text-sm whitespace-nowrap flex items-center justify-center gap-2 group"
                   >
                     <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -438,7 +438,7 @@ const DoubtDetailPage = () => {
         </div>
 
         {/* Bottom Accent */}
-        <div className="h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-b-2xl"></div>
+        <div className="h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent rounded-b-2xl"></div>
       </div>
     </div>
   );
