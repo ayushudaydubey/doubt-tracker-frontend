@@ -123,11 +123,11 @@ const StudentDoubtDetailPage = () => {
 
         {/* Main Content Card */}
         <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl border-x border-gray-700/50 shadow-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 sm:p-6">
             {/* Left Column - Image */}
             {doubt.image && (
               <div className="order-1">
-                <div className="relative rounded-xl overflow-hidden shadow-lg bg-gray-800 border border-gray-700 h-80 lg:h-[450px] group">
+                <div className="relative rounded-xl overflow-hidden shadow-lg bg-gray-800 border border-gray-700 h-56 sm:h-72 md:h-80 lg:h-[450px] group">
                   <img
                     src={doubt.image}
                     alt="Doubt"
@@ -146,7 +146,7 @@ const StudentDoubtDetailPage = () => {
             )}
 
             {/* Right Column - Details */}
-            <div className={`order-2 space-y-4 ${!doubt.image ? 'lg:col-span-2' : ''}`}>
+            <div className={`order-2 space-y-4 ${!doubt.image ? 'md:col-span-2' : ''}`}>
               {/* Metadata */}
               <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 bg-gray-800/30 px-3 py-2 rounded-lg border border-gray-700/50">
                 <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

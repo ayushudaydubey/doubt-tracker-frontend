@@ -79,18 +79,17 @@ const Home = () => {
         <div className="w-full md:w-1/2 flex justify-center">
           <div className="relative group">
             {/* Glow effect behind image */}
-            <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-2xl blur-2xl group-hover:blur-2xl transition-all duration-500"></div>
+            <div className="absolute inset-0  rounded-2xl blur-2xl transition-all duration-500"></div>
             
             {/* Image container */}
-            <div className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden p-2 group-hover:border-green-500/50 transition-all duration-500">
+            <div className="relative bg-gradient-to-br backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden p-2 transition-all duration-500">
               <img
                 src={linoImage}
                 alt="Doubt illustration"
                 className="w-full h-full object-cover rounded-xl transform  transition-transform duration-500"
               />
               
-              {/* Overlay gradient on hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-green-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
+             
             </div>
 
             {/* Floating elements */}

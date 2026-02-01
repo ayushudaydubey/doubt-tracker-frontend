@@ -143,11 +143,11 @@ const DoubtDetailPage = () => {
 
         {/* Main Content Card */}
         <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-xl border-x border-gray-700/50 shadow-xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 sm:p-6">
             {/* Left Column - Image */}
             {doubt.image && (
               <div className="order-1">
-                <div className="relative rounded-xl overflow-hidden shadow-lg bg-gray-800 border border-gray-700 h-80 lg:h-[450px] group">
+                <div className="relative rounded-xl overflow-hidden shadow-lg bg-gray-800 border border-gray-700 h-56 sm:h-72 md:h-80 lg:h-[450px] group">
                   <img
                     src={doubt.image}
                     alt="Doubt"
@@ -166,7 +166,7 @@ const DoubtDetailPage = () => {
             )}
 
             {/* Right Column - Details */}
-            <div className={`order-2 space-y-4 ${!doubt.image ? 'lg:col-span-2' : ''}`}>
+            <div className={`order-2 space-y-4 ${!doubt.image ? 'md:col-span-2' : ''}`}>
               {/* Student Information */}
               <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-700/30 rounded-xl p-4 backdrop-blur-sm">
                 <h4 className="text-sm font-semibold text-green-400 mb-3 flex items-center gap-2">
@@ -257,7 +257,7 @@ const DoubtDetailPage = () => {
                 </svg>
                 Conversation
               </h4>
-              <div className="bg-gray-800/30 border border-gray-700/50 rounded-xl shadow-lg max-h-80 overflow-y-auto">
+              <div className="bg-gray-800/30 border border-gray-700/50 rounded-xl shadow-lg max-h-[40vh] md:max-h-80 overflow-y-auto">
                 <ul className="divide-y divide-gray-700/30">
                   {doubt.messages.map((m, idx) => (
                     <li key={m._id || m.createdAt || idx} className="p-3 hover:bg-gray-800/20 transition-colors">
@@ -307,52 +307,72 @@ const DoubtDetailPage = () => {
           {/* Image Gallery Modal */}
           {openIndex !== null && images.length > 0 && (
             <div
-              className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50"
+              className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-3 sm:p-6"
               onClick={() => setOpenIndex(null)}
             >
-              <div className="relative p-4" onClick={(e) => e.stopPropagation()}>
+              <div
+                className="relative w-full max-w-5xl h-[85vh] flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Close */}
                 <button
-                  type="button"
-                  className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-400 hover:to-red-500 rounded-full p-2 shadow-lg transition-all"
+                  className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-red-600 text-white rounded-full px-3 py-1 text-sm"
                   onClick={() => setOpenIndex(null)}
-                  aria-label="Close image"
                 >
-                  <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  ✕
                 </button>
 
-                <div className="flex items-center gap-4">
+                {/* Prev (desktop) */}
+                {images.length > 1 && (
                   <button
-                    type="button"
-                    className="bg-gray-800/90 hover:bg-gray-700 backdrop-blur-sm rounded-full p-3 shadow-lg transition-all text-white text-xl font-bold"
-                    onClick={() => {
-                      setOpenIndex((prev) => {
-                        if (typeof prev !== 'number') return 0;
-                        return (prev - 1 + images.length) % images.length;
-                      });
-                    }}
+                    className="hidden sm:flex absolute left-4 text-white text-4xl"
+                    onClick={() =>
+                      setOpenIndex((prev) => (prev - 1 + images.length) % images.length)
+                    }
+                  >
+                    ‹
+                  </button>
+                )}
+
+                {/* Prev (mobile) */}
+                {images.length > 1 && (
+                  <button
+                    className="sm:hidden absolute left-4 bottom-6 text-white text-3xl bg-black/40 rounded-full p-2"
+                    onClick={() => setOpenIndex((prev) => (prev - 1 + images.length) % images.length)}
                     aria-label="Previous image"
                   >
                     ‹
                   </button>
+                )}
 
-                  <img src={images[openIndex] || ''} alt={`Image ${openIndex + 1}`} className="max-w-[80vw] max-h-[80vh] rounded-xl shadow-2xl object-contain border border-gray-700" />
+                {/* IMAGE */}
+                <img
+                  src={images[openIndex]}
+                  alt="Preview"
+                  className="max-w-full max-h-full object-contain rounded-lg"
+                  draggable={false}
+                />
 
+                {/* Next (desktop) */}
+                {images.length > 1 && (
                   <button
-                    type="button"
-                    className="bg-gray-800/90 hover:bg-gray-700 backdrop-blur-sm rounded-full p-3 shadow-lg transition-all text-white text-xl font-bold"
-                    onClick={() => {
-                      setOpenIndex((prev) => {
-                        if (typeof prev !== 'number') return 0;
-                        return (prev + 1) % images.length;
-                      });
-                    }}
+                    className="hidden sm:flex absolute right-4 text-white text-4xl"
+                    onClick={() => setOpenIndex((prev) => (prev + 1) % images.length)}
+                  >
+                    ›
+                  </button>
+                )}
+
+                {/* Next (mobile) */}
+                {images.length > 1 && (
+                  <button
+                    className="sm:hidden absolute right-4 bottom-6 text-white text-3xl bg-black/40 rounded-full p-2"
+                    onClick={() => setOpenIndex((prev) => (prev + 1) % images.length)}
                     aria-label="Next image"
                   >
                     ›
                   </button>
-                </div>
+                )}
               </div>
             </div>
           )}
@@ -383,7 +403,7 @@ const DoubtDetailPage = () => {
                   />
                   <button
                     onClick={handleSendMessage}
-                    className="px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-green-500/30 text-sm whitespace-nowrap flex items-center justify-center gap-2 group"
+                    className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-green-500/30 text-sm whitespace-nowrap flex items-center justify-center gap-2 group"
                   >
                     <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />

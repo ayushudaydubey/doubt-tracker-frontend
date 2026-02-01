@@ -214,7 +214,7 @@ const Footer = () => {
                   <div className="w-8 h-8 bg-gray-800/50 group-hover:bg-green-500/20 border border-gray-700/50 group-hover:border-green-500/50 rounded-lg flex items-center justify-center transition-all flex-shrink-0 mt-0.5">
                     <Mail size={16} className="text-gray-400 group-hover:text-green-400 transition-colors" />
                   </div>
-                  <span className="break-all">support@doubttracker.com</span>
+                  <span className="break-all">102001ayushdubey@gmail.com</span>
                 </a>
               </li>
               <li>
@@ -225,7 +225,7 @@ const Footer = () => {
                   <div className="w-8 h-8 bg-gray-800/50 group-hover:bg-green-500/20 border border-gray-700/50 group-hover:border-green-500/50 rounded-lg flex items-center justify-center transition-all flex-shrink-0 mt-0.5">
                     <Phone size={16} className="text-gray-400 group-hover:text-green-400 transition-colors" />
                   </div>
-                  <span>+1 (234) 567-890</span>
+                  <span>+91 6266993726</span>
                 </a>
               </li>
               <li>
@@ -234,8 +234,8 @@ const Footer = () => {
                     <MapPin size={16} className="text-gray-400" />
                   </div>
                   <span className="leading-relaxed">
-                    123 Learning Street,<br />
-                    Education City, EC 12345
+                    Indrapuri Sector C<br />
+                    Bhopal M.P
                   </span>
                 </div>
               </li>
