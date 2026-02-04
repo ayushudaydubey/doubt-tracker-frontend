@@ -9,7 +9,7 @@ const MentorRegister = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
 
   const navigate = useNavigate();
@@ -27,31 +27,38 @@ const MentorRegister = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-orange-50 px-4 pt-20">
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 pt-12">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-xl rounded-xl p-8 w-full max-w-md space-y-6"
+        className="w-full max-w-md bg-gray-900 border border-gray-700 rounded-2xl p-8 space-y-6 shadow-2xl"
       >
-        <h2 className="text-3xl font-bold text-orange-600 text-center">
+        <h2 className="text-3xl font-bold text-green-500 text-center">
           Mentor Registration
         </h2>
 
-    
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Name</label>
+        {/* Name */}
+        <div>
+          <label className="text-sm text-gray-300">Name</label>
           <input
             type="text"
             placeholder="Your full name"
             {...register("name", { required: "Name is required" })}
-            className={`border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-              errors.name ? "border-red-500 focus:ring-red-400" : "border-gray-300 focus:ring-orange-400"
+            className={`mt-1 w-full px-4 py-2 rounded-lg bg-gray-800 border text-gray-200 focus:outline-none focus:ring-2 ${
+              errors.name
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-700 focus:ring-green-500"
             }`}
           />
-          {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-xs text-red-400 mt-1">
+              {errors.name.message}
+            </p>
+          )}
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Email</label>
+        {/* Email */}
+        <div>
+          <label className="text-sm text-gray-300">Email</label>
           <input
             type="email"
             placeholder="example@email.com"
@@ -59,39 +66,51 @@ const MentorRegister = () => {
               required: "Email is required",
               pattern: {
                 value: /^\S+@\S+\.\S+$/,
-                message: "Enter a valid email address"
-              }
+                message: "Enter a valid email address",
+              },
             })}
-            className={`border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-              errors.email ? "border-red-500 focus:ring-red-400" : "border-gray-300 focus:ring-orange-400"
+            className={`mt-1 w-full px-4 py-2 rounded-lg bg-gray-800 border text-gray-200 focus:outline-none focus:ring-2 ${
+              errors.email
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-700 focus:ring-green-500"
             }`}
           />
-          {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-xs text-red-400 mt-1">
+              {errors.email.message}
+            </p>
+          )}
         </div>
 
-     
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Password</label>
+        {/* Password */}
+        <div>
+          <label className="text-sm text-gray-300">Password</label>
           <input
             type="password"
-            placeholder="Min 6 characters"
+            placeholder="Minimum 6 characters"
             {...register("password", {
               required: "Password is required",
               minLength: {
                 value: 6,
-                message: "Password must be at least 6 characters"
-              }
+                message: "Password must be at least 6 characters",
+              },
             })}
-            className={`border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-              errors.password ? "border-red-500 focus:ring-red-400" : "border-gray-300 focus:ring-orange-400"
+            className={`mt-1 w-full px-4 py-2 rounded-lg bg-gray-800 border text-gray-200 focus:outline-none focus:ring-2 ${
+              errors.password
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-700 focus:ring-green-500"
             }`}
           />
-          {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-xs text-red-400 mt-1">
+              {errors.password.message}
+            </p>
+          )}
         </div>
 
-  
-        <div className="flex flex-col gap-1">
-          <label className="text-sm font-medium text-gray-700">Mobile</label>
+        {/* Mobile */}
+        <div>
+          <label className="text-sm text-gray-300">Mobile</label>
           <input
             type="tel"
             placeholder="10-digit number"
@@ -99,19 +118,25 @@ const MentorRegister = () => {
               required: "Mobile number is required",
               pattern: {
                 value: /^[0-9]{10}$/,
-                message: "Enter a valid 10-digit mobile number"
-              }
+                message: "Enter a valid 10-digit mobile number",
+              },
             })}
-            className={`border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 ${
-              errors.mobile ? "border-red-500 focus:ring-red-400" : "border-gray-300 focus:ring-orange-400"
+            className={`mt-1 w-full px-4 py-2 rounded-lg bg-gray-800 border text-gray-200 focus:outline-none focus:ring-2 ${
+              errors.mobile
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-700 focus:ring-green-500"
             }`}
           />
-          {errors.mobile && <p className="text-sm text-red-500">{errors.mobile.message}</p>}
+          {errors.mobile && (
+            <p className="text-xs text-red-400 mt-1">
+              {errors.mobile.message}
+            </p>
+          )}
         </div>
 
         <button
           type="submit"
-          className="w-full bg-orange-500 text-white py-2 rounded-lg font-semibold hover:bg-orange-600 transition duration-300"
+          className="w-full bg-green-600 hover:bg-green-500 text-white py-2 rounded-lg font-semibold transition"
         >
           Register
         </button>
