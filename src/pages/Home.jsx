@@ -58,7 +58,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
             <Link
               to="/auth/mentor-login"
-              className="group relative px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-green-500/30 hover:shadow-green-500/50 hover:scale-105 flex items-center justify-center gap-2"
+              className="group relative px-8 py-4 bg-gradient-to-r from-green-700 to-emerald-700  text-white rounded-xl font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
             >
               <Users size={20} />
               <span>Mentor Login</span>
@@ -109,7 +109,7 @@ const Home = () => {
                 <Users size={28} className="text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-green-400">50+</p>
+                <p className="text-3xl font-mediam text-green-400">50+</p>
                 <p className="text-sm text-gray-400">Active Mentors</p>
               </div>
             </div>
@@ -135,7 +135,7 @@ const Home = () => {
                 <CheckCircle size={28} className="text-white" />
               </div>
               <div>
-                <p className="text-3xl font-bold text-green-400">95%</p>
+                <p className="text-3xl font-mediam text-green-400">95%</p>
                 <p className="text-sm text-gray-400">Success Rate</p>
               </div>
             </div>
